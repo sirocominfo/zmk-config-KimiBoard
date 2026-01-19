@@ -33,7 +33,7 @@
 
         default_layer {
             bindings = <
-&bt BT_NXT  &to_mkp 4 MB3  &tog_mkp 3 MB2  &mkp MB1
+&bt BT_NXT  &to_mkp 4 MB3  &mkp MB1  &tog_mkp 3 MB2
             >;
         };
 
@@ -57,7 +57,7 @@
 
         page {
             bindings = <
-&trans  &trans  &kp PAGE_DOWN  &kp PAGE_UP
+&trans  &kp PAGE_DOWN  &trans  &kp PAGE_UP
             >;
         };
     };
