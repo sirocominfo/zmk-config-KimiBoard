@@ -57,7 +57,7 @@
 
         page {
             bindings = <
-&trans  &kp PAGE_DOWN  &trans  &kp PAGE_UP
+&trans  &trans  &kp PAGE_DOWN  &kp PAGE_UP
             >;
         };
     };
