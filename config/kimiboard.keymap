@@ -113,7 +113,7 @@
 
         default_layer {
             bindings = <
-&bt BT_NXT  &mo_mkp 3 MB2  &mkp MB1  &mo_mkp 4 MB3
+&bt BT_NXT  &mo_mkp 3 MB2  &mkp MB1  &lt 4 TAB
             >;
         };
 
@@ -131,7 +131,7 @@
 
         scroll_layer {
             bindings = <
-&trans  &trans  &trans  &to 0
+&trans  &trans  &kp LG(H)  &kp LC(UP_ARROW)
             >;
         };
 
