@@ -8,6 +8,95 @@
 &trackball { scroll-layers = <3>; };
 
 / {
+    macros {
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_0";
+        };
+
+        /* Keep MB1 pressed */
+
+        drag_on: drag_on {
+            compatible = "zmk,behavior-macro";
+            label = "DRAG_ON";
+            #binding-cells = <0>;
+            bindings = <&macro_press>, <&mkp MB1>;
+        };
+
+        /* Release MB1 */
+
+        drag_off: drag_off {
+            compatible = "zmk,behavior-macro";
+            label = "DRAG_OFF";
+            #binding-cells = <0>;
+            bindings = <&macro_release>, <&mkp MB1>;
+        };
+
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <120>;
+            flavor = "tap-preferred";
+            hold-trigger-key-positions = <26>;
+        };
+
+        ROTATE: ROTATE {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            label = "ROTATE";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+
+            tap-ms = <20>;
+        };
+
+        lt_mkp: lt_mkp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LT_MKP";
+            bindings = <&mo>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        mod_mkp: mod_mkp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOD_MKP";
+            bindings = <&kp>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        /* Tap: normal MB1 click / Hold: drag off (release MB1) */
+
+        mb1_or_dragoff: mb1_or_dragoff {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MB1_OR_DRAGOFF";
+            bindings = <&drag_off>, <&mkp>;
+
+            /* hold-tap は const で 2 固定 */
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            hold-trigger-on-release;
+        };
+
+        dragkey: dragkey {
+            compatible = "zmk,behavior-hold-tap";
+            label = "DRAGKEY";
+            bindings = <&drag_on>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            require-prior-idle-ms = <150>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <100>;
+        };
     behaviors {
         mo_mkp: mo_mkp {
             compatible = "zmk,behavior-hold-tap";
