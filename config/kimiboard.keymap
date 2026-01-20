@@ -17,21 +17,19 @@
         };
 
         /* Keep MB1 pressed */
-
         drag_on: drag_on {
             compatible = "zmk,behavior-macro";
             label = "DRAG_ON";
             #binding-cells = <0>;
-            bindings = <&macro_press>, <&mkp MB1>;
+            bindings = <&macro_press &mkp MB1>;
         };
 
         /* Release MB1 */
-
         drag_off: drag_off {
             compatible = "zmk,behavior-macro";
             label = "DRAG_OFF";
             #binding-cells = <0>;
-            bindings = <&macro_release>, <&mkp MB1>;
+            bindings = <&macro_release &mkp MB1>;
         };
 
         lt_to_layer_0: lt_to_layer_0 {
@@ -45,20 +43,10 @@
             hold-trigger-key-positions = <26>;
         };
 
-        ROTATE: ROTATE {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            label = "ROTATE";
-            #sensor-binding-cells = <2>;
-            bindings = <&msc>, <&msc>;
-
-            tap-ms = <20>;
-        };
-
         lt_mkp: lt_mkp {
             compatible = "zmk,behavior-hold-tap";
             label = "LT_MKP";
             bindings = <&mo>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
@@ -67,20 +55,15 @@
             compatible = "zmk,behavior-hold-tap";
             label = "MOD_MKP";
             bindings = <&kp>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
 
         /* Tap: normal MB1 click / Hold: drag off (release MB1) */
-
         mb1_or_dragoff: mb1_or_dragoff {
             compatible = "zmk,behavior-hold-tap";
             label = "MB1_OR_DRAGOFF";
             bindings = <&drag_off>, <&mkp>;
-
-            /* hold-tap は const で 2 固定 */
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             hold-trigger-on-release;
@@ -90,19 +73,19 @@
             compatible = "zmk,behavior-hold-tap";
             label = "DRAGKEY";
             bindings = <&drag_on>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             require-prior-idle-ms = <150>;
             flavor = "tap-preferred";
             quick-tap-ms = <100>;
         };
+    };
+
     behaviors {
         mo_mkp: mo_mkp {
             compatible = "zmk,behavior-hold-tap";
             label = "MO_MKP";
             bindings = <&mo>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
@@ -111,7 +94,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "TOG_MKP";
             bindings = <&tog>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
@@ -122,31 +104,31 @@
 
         default_layer {
             bindings = <
-&bt BT_NXT  &mo_mkp 4 MB3  &mkp MB1  &mo_mkp 3 MB2
+                &bt BT_NXT  &mo_mkp 4 MB3  &mkp MB1  &mo_mkp 3 MB2
             >;
         };
 
         mouse_key_layer {
             bindings = <
-&trans  &mkp MB3  &mkp LCLK  &mkp RCLK
+                &trans  &mkp MB3  &mkp LCLK  &mkp RCLK
             >;
         };
 
         auto_mouse_layer {
             bindings = <
-&trans  &mkp MB3  &mkp LCLK  &mkp RCLK
+                &trans  &mkp MB3  &mkp LCLK  &mkp RCLK
             >;
         };
 
         scroll_layer {
             bindings = <
-&trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans
             >;
         };
 
         page {
             bindings = <
-&trans  &trans  &kp PAGE_DOWN  &kp PAGE_UP
+                &trans  &trans  &kp PAGE_DOWN  &kp PAGE_UP
             >;
         };
     };
@@ -154,18 +136,11 @@
     combos {
         compatible = "zmk,combos";
 
-        // Key1 + 2 = (□ - ■ ■ □)
-        // タップでLANGUAGE_2へ切り替え
-        // ホールドでスクロールレイヤー
-
         combo_layer1 {
             bindings = <&tog 1>;
             key-positions = <2 3>;
             timeout-ms = <50>;
         };
-
-        // Key2 + 3 = (□ - □ ■ ■)
-        // タップでLANGUAGE_1へ切り替え
 
         combo_layer3 {
             bindings = <&tog 3>;
@@ -173,17 +148,11 @@
             timeout-ms = <50>;
         };
 
-        // Key1 + 3 = (□ -  ■ □ ■)
-        // 1番レイヤーをトグル(マウス操作限定レイヤー)
-
         combo_layer0 {
             bindings = <&to 0>;
             key-positions = <1 3>;
             timeout-ms = <50>;
         };
-
-        // Key1 + 3 = (■ -  □ □　■)
-        // 現在の接続先のBT接続情報を消去
 
         combo_layer7 {
             bindings = <&bt BT_CLR>;
